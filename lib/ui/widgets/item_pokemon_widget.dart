@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_codigo_pokedex/ui/widgets/item_type_widget.dart';
 
 class ItemPokemonWidget extends StatelessWidget {
   String name;
   String image;
+  List<String> types;
 
   ItemPokemonWidget({
     required this.name,
     required this.image,
+    required this.types,
   });
 
   @override
@@ -31,6 +34,7 @@ class ItemPokemonWidget extends StatelessWidget {
             padding:
                 const EdgeInsets.symmetric(vertical: 20.0, horizontal: 12.0),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   name,
@@ -40,28 +44,14 @@ class ItemPokemonWidget extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                Container(
-                  margin: const EdgeInsets.symmetric(vertical: 6.0),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 14, vertical: 4.0),
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.27),
-                    borderRadius: BorderRadius.circular(10.0),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.04),
-                        offset: const Offset(4, 4),
-                        blurRadius: 12.0,
-                      )
-                    ],
-                  ),
-                  child: Text(
-                    "Grass",
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
+                // Column(
+                //   children: types.map((e) => ItemTypeWidget()).toList(),
+                // ),
+                ...types
+                    .map((e) => ItemTypeWidget(
+                          text: e,
+                        ))
+                    .toList(),
               ],
             ),
           ),
